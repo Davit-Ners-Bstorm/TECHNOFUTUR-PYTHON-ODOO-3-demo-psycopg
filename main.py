@@ -1,5 +1,5 @@
 from db.db import get_conntection
-from repository.users_repository import get_all_users, get_user_by_id, create_user, update_user_name
+from repository.users_repository import get_all_users, get_user_by_id, create_user, update_user_name, create_2_users
 
 # Ouverture fermature à la main => On doit gerer nous même
 # conn = get_conntection()
@@ -18,7 +18,11 @@ with get_conntection() as conn:
 
     # print('ID = ', nv_id)
 
-    row_affect = update_user_name(conn, "Jordan", 1)
+    # row_affect = update_user_name(conn, "Jordan", 1)
 
-    print(row_affect)
+    # print(row_affect)
+
+    ids = create_2_users(conn, 'Maximilien', "Adam", "2001/01/01", "2001/01/01")
+
+    print(ids)
 

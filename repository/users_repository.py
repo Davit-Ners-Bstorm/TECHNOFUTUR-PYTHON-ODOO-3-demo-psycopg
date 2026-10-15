@@ -40,3 +40,33 @@ def update_user_name(conn: "Connection", nv_name, user_id):
         count_row_affected = cursor.rowcount
 
         return count_row_affected
+
+def create_2_users(conn: "Connection", name1, name2, dob1, dob2):
+    with conn.cursor() as cursor:
+        try:
+            cursor.execute(
+                """
+                INSERT INTO users (name, dob)
+                VALUES (%s, %s)
+                RETURNING id
+                """,
+                (name1, dob1)
+            )
+
+            user1_id = cursor.fetchone()[0]
+
+            cursor.execute(
+                """
+                INSERT INTO users (name, dob)
+                VALUES (%s, %s)
+                RETURNING id
+                """,
+                (name2, dob2)
+            )
+
+            user2_id = cursor.fetchone()[0]
+
+            return user1_id, user2_id
+        except:
+            conn.rollback()
+            return None
