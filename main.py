@@ -1,5 +1,5 @@
 from db.db import get_conntection
-from repository.users_repository import get_all_users
+from repository.users_repository import get_all_users, get_user_by_id
 
 # Ouverture fermature à la main => On doit gerer nous même
 # conn = get_conntection()
@@ -9,3 +9,7 @@ from repository.users_repository import get_all_users
 with get_conntection() as conn:
     users = get_all_users(conn)
     print(users)
+
+    print('******************')
+    user = get_user_by_id(conn, 5)
+    print(user)
